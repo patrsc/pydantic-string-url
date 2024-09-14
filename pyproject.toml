@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pydantic-string-url"
+version = "0.1.0"
+description = "Pydantic URL types that are based on the str class."
+authors = ["Patrick <patrsc@nubu.at>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "pydantic_string_url"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
