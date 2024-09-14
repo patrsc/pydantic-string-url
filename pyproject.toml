@@ -8,9 +8,51 @@ readme = "README.md"
 packages = [{include = "pydantic_string_url"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.8.1"
+pydantic = "^2.0.0"
 
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.11.2"
+isort = "^5.13.2"
+ruff = "^0.6.5"
+black = "^24.8.0"
+flake8 = "^7.1.1"
+pytest = "^8.3.3"
+flake8-pyproject = "^1.2.3"
+pylint = "^3.2.7"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.mypy]
+plugins = [
+  "pydantic.mypy"
+]
+
+[tool.isort]
+line_length = 100
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "UP", "B", "SIM", "I", "W", "N", "D", "ANN", "A", "COM", "PL"]
+ignore = ["ANN101", "ANN102", "ANN401", "D203", "D213", "I001", "COM812"]
+
+[tool.ruff.lint.pylint]
+max-args = 7
+
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.pylint.design]
+max-args = 7
+
+[tool.black]
+line-length = 100
+
+[tool.flake8]
+max-line-length = 100
