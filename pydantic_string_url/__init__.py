@@ -1,15 +1,4 @@
-"""HTTP URL.
-
-The class HttpUrl here fixes a problem with the pydantic v2 HttpUrl class.
-It is based on str, so it is compatible with the URLs expected from other packages.
-
-See Also
---------
-- https://github.com/pydantic/pydantic/issues/7186
-- https://github.com/pydantic/pydantic/discussions/8211
-- https://github.com/pydantic/pydantic/discussions/6395
-
-"""
+"""Pydantic URL types based on strings."""
 
 from typing import Any
 
