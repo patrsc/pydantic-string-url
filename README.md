@@ -1,3 +1,6 @@
+[![Tests](https://github.com/patrsc/pydantic-string-url/actions/workflows/tests.yml/badge.svg)](https://github.com/patrsc/pydantic-string-url/actions/workflows/tests.yml)
+[![Linting](https://github.com/patrsc/pydantic-string-url/actions/workflows/linting.yml/badge.svg)](https://github.com/patrsc/pydantic-string-url/actions/workflows/linting.yml)
+
 # pydantic-string-url
 
 Pydantic URL types that are based on the `str` class.
