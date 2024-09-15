@@ -4,7 +4,8 @@ Pydantic URL types that are based on the `str` class.
 
 ## Introduction
 
-Since [Pydantic](https://docs.pydantic.dev/) v2 the URL-realated types are not based on the
+Since [Pydantic](https://docs.pydantic.dev/) v2 the types realated to
+[URLs](https://docs.pydantic.dev/latest/api/networks/) are not based on the
 standard [Python](https://www.python.org/) `str` class any more.
 
 This decision comes with some issues:
@@ -28,9 +29,10 @@ string and use the same validation functions as their Pydantic counterparts.
 You can still use the replacement type's `.url` property to access the original Pydantic URL type.
 
 See also the discussions here:
-- https://github.com/pydantic/pydantic/issues/7186
-- https://github.com/pydantic/pydantic/discussions/8211
-- https://github.com/pydantic/pydantic/discussions/6395
+- [AnyUrl adds trailing slash](https://github.com/pydantic/pydantic/issues/7186)
+- [Work around for pydantic_core._pydantic_core.Url in V2 where string is expected](https://github.com/pydantic/pydantic/discussions/8211)
+- [How can I integrate pydantic v2 URLs in code?](https://github.com/pydantic/pydantic/discussions/6395)
+- [Url and Dsn types in pydantic.networks no longer inherit from str](https://docs.pydantic.dev/latest/migration/#url-and-dsn-types-in-pydanticnetworks-no-longer-inherit-from-str)
 
 ## Usage
 
@@ -84,4 +86,4 @@ assert john.homepage.url.scheme == 'https'
 
 ## Licence
 
-MIT
+[MIT](LICENSE)
