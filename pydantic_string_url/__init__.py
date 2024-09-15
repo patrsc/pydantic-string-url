@@ -43,7 +43,7 @@ class HttpUrl(str):
         return json_schema
 
     @classmethod
-    def _validate(cls, __input_value: str) -> 'HttpUrl':
+    def _validate(cls, __input_value: str) -> "HttpUrl":
         return cls(__input_value)
 
 

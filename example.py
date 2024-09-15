@@ -35,5 +35,5 @@ except ValidationError as e:
     print(str(e))
 
 # You can still access the Pydantic type by using the string's .url property
-assert url_a.url.scheme == 'https'
-assert john.homepage.url.scheme == 'https'
+assert url_a.url.scheme == "https"
+assert john.homepage.url.scheme == "https"

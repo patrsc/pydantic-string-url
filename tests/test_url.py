@@ -5,7 +5,6 @@ from pydantic import BaseModel, TypeAdapter, ValidationError
 
 from pydantic_string_url import HttpUrl
 
-
 FAILING_HTTP_URL = [
     "",
     "not a url",
