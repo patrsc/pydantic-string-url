@@ -26,10 +26,14 @@ except ValidationError as e:
     print(str(e))
 
 # Use standalone
-urls = ["https://google.com", "some wrong url"]
+urls = ["https://test.com", "some wrong url"]
 
 url_a = TypeAdapter(HttpUrl).validate_python(urls[0])
 try:
     url_b = TypeAdapter(HttpUrl).validate_python(urls[1])
 except ValidationError as e:
     print(str(e))
+
+# You can still access the Pydantic type by using the string's .url property
+assert url_a.url.scheme == 'https'
+assert john.homepage.url.scheme == 'https'

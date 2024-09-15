@@ -25,6 +25,7 @@ This package provides direct replacements for the Pydantic types:
 
 Those replacement types are based on strings, so they are also a `str`, preserve the original input
 string and use the same validation functions as their Pydantic counterparts.
+You can still use the replacement type's `.url` property to access the original Pydantic URL type.
 
 See also the discussions here:
 - https://github.com/pydantic/pydantic/issues/7186
@@ -67,13 +68,17 @@ except ValidationError as e:
     print(str(e))
 
 # Use standalone
-urls = ["https://google.com", "some wrong url"]
+urls = ["https://test.com", "some wrong url"]
 
 url_a = TypeAdapter(HttpUrl).validate_python(urls[0])
 try:
     url_b = TypeAdapter(HttpUrl).validate_python(urls[1])
 except ValidationError as e:
     print(str(e))
+
+# You can still access the Pydantic type by using the string's .url property
+assert url_a.url.scheme == 'https'
+assert john.homepage.url.scheme == 'https'
 
 ```
 

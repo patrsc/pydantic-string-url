@@ -14,8 +14,9 @@ class HttpUrl(str):
 
     def __init__(self, url: str) -> None:
         """Initialize HttpUrl."""
-        validate_url(url)
-        str.__init__(url)
+        pydantic_url = validate_url(url)
+        super().__init__()
+        self.url = pydantic_url
 
     @classmethod
     def __get_pydantic_core_schema__(
@@ -42,13 +43,13 @@ class HttpUrl(str):
         return json_schema
 
     @classmethod
-    def _validate(cls, __input_value: str) -> str:
-        return validate_url(__input_value)
+    def _validate(cls, __input_value: str) -> 'HttpUrl':
+        return cls(__input_value)
 
 
-def validate_url(s: str) -> str:
+def validate_url(s: str) -> PyHttpUrl:
     """Validate if string has the format of a proper HTTP URL."""
     # use pydantic's HttpUrl class just for validation
     a = TypeAdapter(PyHttpUrl)
-    a.validate_python(s, strict=True)
-    return s
+    url = a.validate_python(s, strict=True)
+    return url
