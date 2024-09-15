@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pydantic-string-url"
-version = "0.1.0"
+version = "1.0.0"
 description = "Pydantic URL types that are based on the str class."
 authors = ["Patrick <patrsc@nubu.at>"]
 license = "MIT"
