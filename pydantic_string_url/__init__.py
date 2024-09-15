@@ -1,21 +1,18 @@
 """Pydantic URL types based on strings."""
 
-from typing import Any, TypeVar, Type
+from typing import Any, Type, TypeVar
 
+from pydantic import AnyHttpUrl as PyAnyHttpUrl
+from pydantic import AnyUrl as PyAnyUrl
+from pydantic import AnyWebsocketUrl as PyAnyWebsocketUrl
+from pydantic import FileUrl as PyFileUrl
+from pydantic import FtpUrl as PyFtpUrl
 from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler
-from pydantic import (
-    AnyUrl as PyAnyUrl,
-    AnyHttpUrl as PyAnyHttpUrl,
-    HttpUrl as PyHttpUrl,
-    AnyWebsocketUrl as PyAnyWebsocketUrl,
-    WebsocketUrl as PyWebsocketUrl,
-    FileUrl as PyFileUrl,
-    FtpUrl as PyFtpUrl,
-)
+from pydantic import HttpUrl as PyHttpUrl
 from pydantic import TypeAdapter
+from pydantic import WebsocketUrl as PyWebsocketUrl
 from pydantic.json_schema import JsonSchemaValue
 from pydantic_core import CoreSchema, core_schema
-
 
 T = TypeVar("T", bound=PyAnyUrl)
 

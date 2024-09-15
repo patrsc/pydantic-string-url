@@ -1,10 +1,19 @@
 """Unit tests."""
 
 from typing import Type
+
 import pytest
 from pydantic import BaseModel, TypeAdapter, ValidationError
 
-from pydantic_string_url import AnyUrl, AnyHttpUrl, HttpUrl, AnyWebsocketUrl, WebsocketUrl, FileUrl, FtpUrl
+from pydantic_string_url import (
+    AnyHttpUrl,
+    AnyUrl,
+    AnyWebsocketUrl,
+    FileUrl,
+    FtpUrl,
+    HttpUrl,
+    WebsocketUrl,
+)
 
 FAILING_HTTP_URL = [
     "",
