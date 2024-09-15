@@ -1,6 +1,6 @@
 """Unit tests."""
 
-from typing import Any
+from typing import Tuple, Type
 
 import pytest
 from pydantic import BaseModel, TypeAdapter, ValidationError
@@ -91,7 +91,7 @@ def test_validate_url_property() -> None:
 
 
 @pytest.mark.parametrize("t, passes, fails", test_data)
-def test_all_types(t: Any, passes: tuple[str, ...], fails: tuple[str, ...]) -> None:
+def test_all_types(t: Type[AnyUrl], passes: Tuple[str, ...], fails: Tuple[str, ...]) -> None:
     """Test all URL types."""
     for s in passes:
         u = t(s)
