@@ -6,6 +6,12 @@ authors = ["Patrick <patrsc@nubu.at>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "pydantic_string_url"}]
+homepage = "https://github.com/patrsc/pydantic-string-url"
+repository = "https://github.com/patrsc/pydantic-string-url"
+documentation = "https://github.com/patrsc/pydantic-string-url"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/patrsc/pydantic-string-url/issues"
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
