@@ -9,12 +9,15 @@ on:
       - main
 jobs:
   build:
+    strategy:
+      matrix:
+        python_version: ["3.10", "3.11"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.python_version }}
       - name: Install Poetry
         uses: snok/install-poetry@v1.3.4
         with:
