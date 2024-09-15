@@ -1,6 +1,6 @@
 """Unit tests."""
 
-from typing import Type
+from typing import Any
 
 import pytest
 from pydantic import BaseModel, TypeAdapter, ValidationError
@@ -90,13 +90,13 @@ def test_validate_url_property() -> None:
     assert u.url.path == "/path/subpath"
 
 
-#@pytest.mark.parametrize("t, passes, fails", test_data)
-#def test_all_types(t: Type[AnyUrl], passes: tuple[str, ...], fails: tuple[str, ...]) -> None:
-#    """Test all URL types."""
-#    for s in passes:
-#        u = t(s)
-#        assert u == s
-#    for s in fails:
-#        with pytest.raises(ValidationError):
-#            u = t(s)
-#            print(u)
+@pytest.mark.parametrize("t, passes, fails", test_data)
+def test_all_types(t: Any, passes: tuple[str, ...], fails: tuple[str, ...]) -> None:
+    """Test all URL types."""
+    for s in passes:
+        u = t(s)
+        assert u == s
+    for s in fails:
+        with pytest.raises(ValidationError):
+            u = t(s)
+            print(u)
