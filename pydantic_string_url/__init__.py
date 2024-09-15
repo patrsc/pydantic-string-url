@@ -1,20 +1,34 @@
 """Pydantic URL types based on strings."""
 
-from typing import Any
+from typing import Any, TypeVar, Type
 
 from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler
-from pydantic import HttpUrl as PyHttpUrl
+from pydantic import (
+    AnyUrl as PyAnyUrl,
+    AnyHttpUrl as PyAnyHttpUrl,
+    HttpUrl as PyHttpUrl,
+    AnyWebsocketUrl as PyAnyWebsocketUrl,
+    WebsocketUrl as PyWebsocketUrl,
+    FileUrl as PyFileUrl,
+    FtpUrl as PyFtpUrl,
+)
 from pydantic import TypeAdapter
 from pydantic.json_schema import JsonSchemaValue
 from pydantic_core import CoreSchema, core_schema
 
 
-class HttpUrl(str):
-    """Represents a HTTP URL."""
+T = TypeVar("T", bound=PyAnyUrl)
+
+
+class AnyUrl(str):
+    """Pydantic's AnyUrl based on str."""
+
+    _pydantic_type = PyAnyUrl
+    _example_url = "http://www.example.com/"
 
     def __init__(self, url: str) -> None:
-        """Initialize HttpUrl."""
-        pydantic_url = validate_url(url)
+        """Initialize."""
+        pydantic_url = validate_url(url, self._pydantic_type)
         super().__init__()
         self.url = pydantic_url
 
@@ -39,17 +53,59 @@ class HttpUrl(str):
         json_schema["format"] = "uri"
         json_schema["minLength"] = 1
         json_schema["maxLength"] = 65536
-        json_schema["examples"] = ["http://www.example.com/"]
+        json_schema["examples"] = [cls._example_url]
         return json_schema
 
     @classmethod
-    def _validate(cls, __input_value: str) -> "HttpUrl":
+    def _validate(cls, __input_value: str) -> "AnyUrl":
         return cls(__input_value)
 
 
-def validate_url(s: str) -> PyHttpUrl:
-    """Validate if string has the format of a proper HTTP URL."""
-    # use pydantic's HttpUrl class just for validation
-    a = TypeAdapter(PyHttpUrl)
+def validate_url(s: str, cls: Type[T]) -> T:
+    """Validate if string has the format of a proper URL or given Pydantic type."""
+    # This uses pydantic's class just for validation.
+    a = TypeAdapter(cls)
     url = a.validate_python(s, strict=True)
     return url
+
+
+class AnyHttpUrl(AnyUrl):
+    """Pydantic's AnyHttpUrl based on str."""
+
+    _pydantic_type = PyAnyHttpUrl
+    _example_url = "http://www.example.com/"
+
+
+class HttpUrl(AnyUrl):
+    """Pydantic's HttpUrl based on str."""
+
+    _pydantic_type = PyHttpUrl
+    _example_url = "http://www.example.com/"
+
+
+class AnyWebsocketUrl(AnyUrl):
+    """Pydantic's AnyWebsocketUrl based on str."""
+
+    _pydantic_type = PyAnyWebsocketUrl
+    _example_url = "ws://www.example.com/"
+
+
+class WebsocketUrl(AnyUrl):
+    """Pydantic's WebsocketUrl based on str."""
+
+    _pydantic_type = PyWebsocketUrl
+    _example_url = "ws://www.example.com/"
+
+
+class FileUrl(AnyUrl):
+    """Pydantic's FileUrl based on str."""
+
+    _pydantic_type = PyFileUrl
+    _example_url = "file://www.example.com/"
+
+
+class FtpUrl(AnyUrl):
+    """Pydantic's FtpUrl based on str."""
+
+    _pydantic_type = PyFtpUrl
+    _example_url = "ftp://www.example.com/"

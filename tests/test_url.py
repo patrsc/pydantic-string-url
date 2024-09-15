@@ -1,15 +1,25 @@
 """Unit tests."""
 
+from typing import Type
 import pytest
 from pydantic import BaseModel, TypeAdapter, ValidationError
 
-from pydantic_string_url import HttpUrl
+from pydantic_string_url import AnyUrl, AnyHttpUrl, HttpUrl, AnyWebsocketUrl, WebsocketUrl, FileUrl, FtpUrl
 
 FAILING_HTTP_URL = [
     "",
     "not a url",
     "ftp://example.com",
 ]
+test_data = {
+    (AnyUrl, ("ftp://example.com",), ("no url",)),
+    (AnyHttpUrl, ("https://example.com",), ("ftp://example.com",)),
+    (HttpUrl, ("http://example.com",), ("file://exammple.com",)),
+    (AnyWebsocketUrl, ("ws://example.com",), ("http://exammple.com",)),
+    (WebsocketUrl, ("ws://example.com",), ("http://exammple.com",)),
+    (FileUrl, ("file://example.com",), ("http://exammple.com",)),
+    (FtpUrl, ("ftp://example.com",), ("file://exammple.com",)),
+}
 
 
 class User(BaseModel):
@@ -69,3 +79,15 @@ def test_validate_url_property() -> None:
     assert u.url.scheme == "https"
     assert u.url.host == "www.example.com"
     assert u.url.path == "/path/subpath"
+
+
+@pytest.mark.parametrize("t, passes, fails", test_data)
+def test_all_types(t: Type[AnyUrl], passes: tuple[str, ...], fails: tuple[str, ...]) -> None:
+    """Test all URL types."""
+    for s in passes:
+        u = t(s)
+        assert u == s
+    for s in fails:
+        with pytest.raises(ValidationError):
+            u = t(s)
+            print(u)
