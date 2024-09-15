@@ -39,8 +39,9 @@ See also the discussions here:
 
 ## Usage
 
-The package [pydantic-string-url](#) is available on [PyPi](https://pypi.org/), so it can be
-installed with Python package managers such as `pip` or [poetry](https://python-poetry.org/).
+The package [pydantic-string-url](https://pypi.org/project/pydantic-string-url/) is available
+on [PyPi](https://pypi.org/), so it can be installed with Python package managers such as
+`pip` or [poetry](https://python-poetry.org/).
 
 Usage example:
 
@@ -89,4 +90,4 @@ assert john.homepage.url.scheme == "https"
 
 ## Licence
 
-[MIT](LICENSE)
+MIT
